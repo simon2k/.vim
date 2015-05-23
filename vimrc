@@ -31,6 +31,7 @@ Plugin 'szw/vim-tags'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'simon2k/vim-jump-to-test'
+Plugin 'scrooloose/nerdtree'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -209,3 +210,6 @@ nnoremap <leader>V :e $MYVIMRC<cr>
 autocmd BufRead,BufNewFile *.hamljs set filetype=haml
 
 nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
+
+map - :NERDTreeToggle<CR>
+map <leader>n :NERDTreeFind<CR>
