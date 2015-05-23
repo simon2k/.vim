@@ -62,8 +62,6 @@ let g:netrw_liststyle = 0
 let g:rubyhash_map_keys = 0
 " ruby path if you are using RVM
 let g:ruby_path = system('rvm current')
-" Disable mappings from vim-ruby-refactoring
-let g:ruby_refactoring_map_keys=0
 " Intent private methods
 let g:ruby_indent_access_modifier_style = 'outdent'
 
@@ -162,18 +160,9 @@ set tagbsearch                  " use binary searching for tags
 " The "Press ENTER or type command to continue" prompt is jarring and usually unnecessary.
 set shortmess=atI
 
-" remove search highlighting
-nnoremap <leader>h :noh<cr>
-
-" C-c send enter in insert mode
-inoremap <C-c> <Esc>
-
 " Search word under cursor
 nnoremap K :Ag <cword><cr>
 nnoremap <leader>a :Ag
-
-cnoreabbrev W w
-cnoreabbrev Q q
 
 " Expand %% to current directory
 " http://vimcasts.org/e/14
@@ -213,3 +202,7 @@ nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
 
 map - :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
+
+" Translate selected strings in I18n
+let g:I18nYamlPath = 'config/locales/en-GB.yml'
+vmap <Leader>z :call I18nTranslateString()<CR>
