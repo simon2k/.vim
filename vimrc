@@ -14,6 +14,7 @@ set number
 
 " automatically reload vimrc when it's saved
 au BufWritePost .vimrc so $MYVIMRC
+autocmd BufWritePre * :%s/\s\+$//e
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -32,6 +33,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'simon2k/vim-jump-to-test'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-commentary'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
