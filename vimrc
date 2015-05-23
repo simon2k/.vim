@@ -1,3 +1,5 @@
+let mapleader='\'
+
 " Clear autocmds
 autocmd!
 
@@ -28,6 +30,8 @@ Plugin 'stefanoverna/vim-i18n'
 Plugin 'szw/vim-tags'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
+Plugin 'simon2k/vim-jump-to-test'
+
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
 \ | execute ':redraw!'
@@ -204,8 +208,4 @@ nnoremap <leader>V :e $MYVIMRC<cr>
 " set haml filetype on weird extensions
 autocmd BufRead,BufNewFile *.hamljs set filetype=haml
 
-" quickfix window height is automatically adjusted to fit its contents
-au FileType qf call AdjustWindowHeight(3, 15)
-function! AdjustWindowHeight(minheight, maxheight)
-  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
-endfunction
+nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
