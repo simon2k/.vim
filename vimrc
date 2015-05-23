@@ -26,7 +26,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
-Plugin 'stefanoverna/vim-i18n'
+Plugin 'simon2k/vim-i18n'
 Plugin 'szw/vim-tags'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -205,4 +205,3 @@ map <leader>n :NERDTreeFind<CR>
 
 " Translate selected strings in I18n
 let g:I18nYamlPath = 'config/locales/en-GB.yml'
-vmap <Leader>z :call I18nTranslateString()<CR>
