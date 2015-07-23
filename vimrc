@@ -34,6 +34,8 @@ Plugin 'rking/ag.vim'
 Plugin 'simon2k/vim-jump-to-test'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
+Plugin 'henrik/vim-yaml-flattener'
+Plugin 'leafgarland/typescript-vim'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -72,9 +74,6 @@ set encoding=utf-8 nobomb
 
 set listchars=
 
-" Syntax coloring lines that are too long just slows down the world
-set synmaxcol=128
-
 " Use only 1 space after "." when joining lines instead of 2
 set nojoinspaces
 
@@ -89,7 +88,6 @@ autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 set background=dark
 colorscheme railscasts
 highlight clear SignColumn
-highlight SignColumn term=standout ctermfg=242 ctermbg=bg guifg=#777777 guibg=bg
 
 syntax enable
 syntax sync fromstart
@@ -106,7 +104,7 @@ set wildmenu                    " show completion on the modeline
 set linespace=0                 " number of pixels between the lines
 set splitright                  " open vertical splits on the right
 set splitbelow                  " open the horizontal split below
-set wrap                        " wrap long lines
+set nowrap                      " do not wrap long lines
 set linebreak                   " break lines at word end
 set nobackup                    " don't want no backup files
 set nowritebackup               " don't make a backup before overwriting a file
@@ -203,6 +201,8 @@ autocmd BufRead,BufNewFile *.hamljs set filetype=haml
 nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
 
 map - :NERDTreeToggle<CR>
+
+" localize the current file in the nerd tree list
 map <leader>n :NERDTreeFind<CR>
 
 " Translate selected strings in I18n
@@ -214,4 +214,19 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guioptions-=M  " Remove menubar
 
-set guifont=menlo:h16
+set guifont=menlo:h13
+
+set shortmess=at
+
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
+
+silent !<command>
+
+map <leader>c :CtrlPClearCache<cr>
+
+map <leader>h :noh<cr>
+
+map <leader>gr :Gread<cr>
+map <leader>gb :Gblame<cr>
