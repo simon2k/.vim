@@ -20,22 +20,32 @@ autocmd BufWritePre * :%s/\s\+$//e
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'digitaltoad/vim-jade'
 Plugin 'dockyard/vim-easydir'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'gosukiwi/vim-atom-dark'
+Plugin 'henrik/vim-yaml-flattener'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'simon2k/vim-i18n'
+Plugin 'simon2k/vim-jump-to-test'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
-Plugin 'simon2k/vim-i18n'
-Plugin 'szw/vim-tags'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/ctags.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'simon2k/vim-jump-to-test'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'henrik/vim-yaml-flattener'
-Plugin 'leafgarland/typescript-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-ruby/vim-ruby'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -85,8 +95,8 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 "" Add the '-' as a keyword in erb files
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
+colorscheme Lavender
 set background=dark
-colorscheme railscasts
 highlight clear SignColumn
 
 syntax enable
@@ -202,8 +212,6 @@ nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
 
 map - :NERDTreeToggle<CR>
 
-" localize the current file in the nerd tree list
-map <leader>n :NERDTreeFind<CR>
 
 " Translate selected strings in I18n
 let g:I18nYamlPath = 'config/locales/en-GB.yml'
@@ -214,7 +222,7 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guioptions-=M  " Remove menubar
 
-set guifont=menlo:h13
+set guifont=menlo:h12
 
 set shortmess=at
 
@@ -230,3 +238,13 @@ map <leader>h :noh<cr>
 
 map <leader>gr :Gread<cr>
 map <leader>gb :Gblame<cr>
+
+" CTags
+map <Leader>rt :!ctags --extra=+f --exclude=.git --exclude=coverage --exclude=.svn --exclude=log  --exclude=app/assets --exclude=vendor -R<cr><cr>
+nnoremap <leader>r :CtrlPTag<CR><CR>
+
+" localize the current file in the nerd tree list
+map <leader>n :NERDTreeFind<CR>
+
+" Use zsh
+set shell=zsh\ -i
