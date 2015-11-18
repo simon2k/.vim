@@ -46,6 +46,8 @@ Plugin 'vim-scripts/ctags.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'jimenezrick/vimerl'
+Plugin 'tpope/vim-vinegar'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -95,7 +97,7 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 "" Add the '-' as a keyword in erb files
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
-colorscheme Lavender
+colorscheme railscasts
 set background=dark
 highlight clear SignColumn
 
