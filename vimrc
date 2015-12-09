@@ -1,5 +1,3 @@
-let mapleader='\'
-
 " Clear autocmds
 autocmd!
 
@@ -20,12 +18,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'dockyard/vim-easydir'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'henrik/vim-yaml-flattener'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'junegunn/vim-easy-align'
@@ -48,6 +44,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'jimenezrick/vimerl'
 Plugin 'tpope/vim-vinegar'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'bling/vim-airline'
+Plugin 'vim-scripts/SQLUtilities'
+Plugin 'vim-scripts/Align'
+Plugin 'w0ng/vim-hybrid'
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -61,7 +62,7 @@ hi def link CtrlPMatch CursorLine
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public/assets\|vendor\|Android',
+  \ 'dir':  '\.git\|node_modules\|bin\|\.hg\|\.svn\|build\|log\|resources\|coverage\|doc\|tmp\|public\|vendor\|Android',
   \ 'file': '\.jpg$\|\.exe$\|\.so$\|tags$\|\.dll$'
   \ }
 
@@ -75,16 +76,16 @@ nnoremap <S-TAB> :bp<cr>
 let g:netrw_liststyle = 0
 
 " Don't map rubyhash keys
-let g:rubyhash_map_keys = 0
+" let g:rubyhash_map_keys = 0
 " ruby path if you are using RVM
-let g:ruby_path = system('rvm current')
+" let g:ruby_path = system('rvm current')
 " Intent private methods
-let g:ruby_indent_access_modifier_style = 'outdent'
+" let g:ruby_indent_access_modifier_style = 'outdent'
 
 " Use UTF-8 without BOM
 set encoding=utf-8 nobomb
 
-set listchars=
+" set listchars=
 
 " Use only 1 space after "." when joining lines instead of 2
 set nojoinspaces
@@ -97,7 +98,8 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 "" Add the '-' as a keyword in erb files
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
-colorscheme railscasts
+" colorscheme railscasts
+colorscheme hybrid
 set background=dark
 highlight clear SignColumn
 
@@ -182,6 +184,7 @@ cnoremap %% <C-R>=expand('%')<cr>
 
 " Limit commit message width and check spelling
 autocmd Filetype gitcommit setlocal spell textwidth=72
+set spell
 
 " =============================================================================
 " Filetypes and Custom Autocmds
@@ -224,7 +227,7 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guioptions-=M  " Remove menubar
 
-set guifont=menlo:h12
+set guifont=menlo:h15
 
 set shortmess=at
 
@@ -250,3 +253,16 @@ map <leader>n :NERDTreeFind<CR>
 
 " Use zsh
 set shell=zsh\ -i
+
+" Enable auto-saving data
+let g:auto_save = 0
+
+" Map ; to : - to save time when issuing a command
+nmap ; :
+
+vnoremap // y/<C-R>"<CR>"
+
+nmap <c-b> :cprevious<CR>
+nmap <c-n> :cnext<CR>
+
+nnoremap <Leader>z :%!jq '.'<CR>
