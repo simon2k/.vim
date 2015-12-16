@@ -86,8 +86,8 @@ colorscheme railscasts
 set background=dark
 highlight clear SignColumn
 
-" syntax enable
-" syntax sync fromstart
+syntax enable
+syntax sync fromstart
 
 set ls=2 " show a status line even if there's only one window
 
