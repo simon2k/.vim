@@ -21,13 +21,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
+Plugin 'bronson/vim-ruby-block-conv'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'dockyard/vim-easydir'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'gmarik/Vundle.vim'
+Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'henrik/vim-yaml-flattener'
-Plugin 'bronson/vim-ruby-block-conv'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jimenezrick/vimerl'
 Plugin 'joshdick/onedark.vim'
@@ -42,6 +43,7 @@ Plugin 'simon2k/vim-i18n'
 Plugin 'simon2k/vim-jump-to-test'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
@@ -82,7 +84,6 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
 " Colorscheme
-colorscheme railscasts
 set background=dark
 highlight clear SignColumn
 
@@ -170,7 +171,7 @@ set guioptions-=L " Remove left-hand scroll bar
 set guioptions-=M " Remove menubar
 
 " Awesome font!
-set guifont=menlo:h16
+set guifont=menlo:h14
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -257,6 +258,10 @@ map <Leader>rs :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
 map <Leader>ra :call RunAllSpecs()<CR>
 
+" Dispatch rspec command
+let g:rspec_command = "Dispatch rspec {spec}"
+
 " Debugging abbreviations - expandable
 :ab bp binding.pry
 :ab cl console.log
+:ab db debugger
