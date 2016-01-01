@@ -84,6 +84,7 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
 " Colorscheme
+colorscheme railscasts
 set background=dark
 highlight clear SignColumn
 
@@ -171,7 +172,7 @@ set guioptions-=L " Remove left-hand scroll bar
 set guioptions-=M " Remove menubar
 
 " Awesome font!
-set guifont=menlo:h14
+set guifont=menlo:h15
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -197,6 +198,9 @@ map - :NERDTreeToggle<CR>
 
 " Localize the currently file in the nerd tree list
 map <leader>n :NERDTreeFind<CR>
+
+" Ignore certain files in nerd tree view
+let NERDTreeIgnore=['\$.class']
 
 " Limit commit message width and check spelling
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -257,9 +261,6 @@ map <Leader>rc :call RunCurrentSpecFile()<CR>
 map <Leader>rs :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
 map <Leader>ra :call RunAllSpecs()<CR>
-
-" Dispatch rspec command
-let g:rspec_command = "Dispatch rspec {spec}"
 
 " Debugging abbreviations - expandable
 :ab bp binding.pry
