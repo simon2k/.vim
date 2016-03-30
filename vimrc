@@ -19,18 +19,17 @@ autocmd BufWritePre * :%s/\s\+$//e
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
-Plugin 'bronson/vim-ruby-block-conv'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'digitaltoad/vim-jade'
+" Plugin 'bronson/vim-ruby-block-conv'
+" Plugin 'derekwyatt/vim-scala'
+" Plugin 'digitaltoad/vim-jade'
 Plugin 'dockyard/vim-easydir'
-Plugin 'ekalinin/Dockerfile.vim'
+" Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'gosukiwi/vim-atom-dark'
-Plugin 'henrik/vim-yaml-flattener'
+" Plugin 'gosukiwi/vim-atom-dark'
+" Plugin 'henrik/vim-yaml-flattener'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'jimenezrick/vimerl'
 Plugin 'joshdick/onedark.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kchmck/vim-coffee-script'
@@ -39,11 +38,11 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'simon2k/vim-i18n'
+" Plugin 'simon2k/vim-i18n'
 Plugin 'simon2k/vim-jump-to-test'
-Plugin 'thoughtbot/vim-rspec'
+" Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
+" Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
@@ -54,7 +53,11 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/Align'
 Plugin 'vim-scripts/SQLUtilities'
 Plugin 'vim-scripts/ctags.vim'
-Plugin 'w0ng/vim-hybrid'
+" Plugin 'w0ng/vim-hybrid'
+Plugin 'mxw/vim-jsx'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'junegunn/gv.vim'
+Plugin 'NLKNguyen/papercolor-theme'
 call vundle#end()
 
 autocmd FileType ruby compiler ruby
@@ -62,7 +65,6 @@ autocmd FileType ruby compiler ruby
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
 \ | execute ':redraw!'
-
 
 " Enable file type detection and load plugin indent files
 filetype plugin on
@@ -83,12 +85,9 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 " Set the '-' as a keyword in erb files
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
-" Colorscheme
-colorscheme railscasts
-set background=dark
-highlight clear SignColumn
+set t_Co=256
+colorscheme onedark
 
-syntax enable
 syntax sync fromstart
 
 set ls=2 " show a status line even if there's only one window
@@ -151,9 +150,6 @@ set shiftround  " indent to the closest shiftwidth
 set switchbuf="" " do not move focus/cursor to where the buffer is already open
 set tagbsearch   " use binary searching for tags
 
-" Spell words in vim - mark invalid ones
-set spell
-
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -162,7 +158,7 @@ vnoremap > >gv
 nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
 
 " Translate selected strings in I18n
-let g:I18nYamlPath = 'config/locales/en-GB.yml'
+" let g:I18nYamlPath = 'config/locales/en-GB.yml'
 
 " Remove unnecessary stuff from the window
 set guioptions-=m " Remove menu bar
@@ -172,7 +168,7 @@ set guioptions-=L " Remove left-hand scroll bar
 set guioptions-=M " Remove menubar
 
 " Awesome font!
-set guifont=menlo:h15
+set guifont=Menlo:h15
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -200,10 +196,12 @@ map - :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
 
 " Ignore certain files in nerd tree view
-let NERDTreeIgnore=['\$.class']
+let NERDTreeIgnore=['\.class']
 
 " Limit commit message width and check spelling
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+set nospell
 
 " Create a commit
 map <leader>gco :Gco<cr>
@@ -232,6 +230,9 @@ let g:ctrlp_custom_ignore = {
 " Clear cache for CtrlP - index a new list of files
 map <leader>c :CtrlPClearCache<cr>
 
+" Show me recently opened files
+nmap <leader>b :CtrlPBuffer<cr>
+
 " Index tags within a project
 map <Leader>rt :!ctags --extra=+f --exclude=.git --exclude=coverage --exclude=.svn --exclude=log  --exclude=app/assets --exclude=vendor -R<cr><cr>
 
@@ -244,9 +245,6 @@ nnoremap <tab> :bn<cr>
 " Open previous buffer
 nnoremap <s-tab> :bp<cr>
 
-" Map ; to : - faster
-nmap ; :
-
 " Install VIM Plugins
 nmap <leader>bi :BundleInstall<cr>
 
@@ -256,13 +254,6 @@ nmap <silent> <leader>h :set invhls<CR>:set hls?<CR>
 " Exec specs in osx iterm
 let g:rspec_runner = 'os_x_iterm'
 
-" RSpec mappings
-map <Leader>rc :call RunCurrentSpecFile()<CR>
-map <Leader>rs :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
-map <Leader>ra :call RunAllSpecs()<CR>
-
 " Debugging abbreviations - expandable
-:ab bp binding.pry
-:ab cl console.log
-:ab db debugger
+:ab bpy binding.pry
+:ab clg console.log
