@@ -19,7 +19,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-" Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 " Plugin 'bronson/vim-ruby-block-conv'
 " Plugin 'derekwyatt/vim-scala'
@@ -58,6 +58,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'junegunn/gv.vim'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'szw/vim-tags'
 call vundle#end()
 
 autocmd FileType ruby compiler ruby
@@ -174,9 +175,6 @@ command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
 \ | execute ':redraw!'
 
-" Use zsh as a default shell
-set shell=zsh\ -i
-
 " File Types
 set wildmode=longest,list
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
@@ -255,5 +253,8 @@ nmap <silent> <leader>h :set invhls<CR>:set hls?<CR>
 let g:rspec_runner = 'os_x_iterm'
 
 " Debugging abbreviations - expandable
-:ab bpy binding.pry
-:ab clg console.log
+:ab bp binding.pry
+:ab clg console.log()
+:ab clog console.log()
+
+au FileType ruby nnoremap rc :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) 2>/dev/null<CR>
