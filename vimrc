@@ -1,6 +1,8 @@
 " Clear autocmds
 autocmd!
 
+" set shell=zsh\ -i
+
 " Use Vim settings, rather than Vi settings
 " This must be first because it changes other options as a side effect
 set nocompatible
@@ -19,46 +21,15 @@ autocmd BufWritePre * :%s/\s\+$//e
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-" Plugin 'bronson/vim-ruby-block-conv'
-" Plugin 'derekwyatt/vim-scala'
-" Plugin 'digitaltoad/vim-jade'
-Plugin 'dockyard/vim-easydir'
-" Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'gmarik/Vundle.vim'
-" Plugin 'gosukiwi/vim-atom-dark'
-" Plugin 'henrik/vim-yaml-flattener'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'joshdick/onedark.vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mattn/emmet-vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'simon2k/vim-i18n'
-Plugin 'simon2k/vim-jump-to-test'
-" Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-commentary'
-" Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/Align'
-Plugin 'vim-scripts/SQLUtilities'
-Plugin 'vim-scripts/ctags.vim'
-" Plugin 'w0ng/vim-hybrid'
-Plugin 'mxw/vim-jsx'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'junegunn/gv.vim'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'szw/vim-tags'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 
 autocmd FileType ruby compiler ruby
@@ -87,7 +58,7 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
 set t_Co=256
-colorscheme onedark
+colorscheme railscasts
 
 syntax sync fromstart
 
@@ -155,12 +126,6 @@ set tagbsearch   " use binary searching for tags
 vnoremap < <gv
 vnoremap > >gv
 
-" Toggle between a test file and its implementation
-nnoremap <leader>t :call ToggleBetweenTestAndFile()<cr>
-
-" Translate selected strings in I18n
-" let g:I18nYamlPath = 'config/locales/en-GB.yml'
-
 " Remove unnecessary stuff from the window
 set guioptions-=m " Remove menu bar
 set guioptions-=T " Remove toolbar
@@ -193,28 +158,10 @@ map - :NERDTreeToggle<CR>
 " Localize the currently file in the nerd tree list
 map <leader>n :NERDTreeFind<CR>
 
-" Ignore certain files in nerd tree view
-let NERDTreeIgnore=['\.class']
-
 " Limit commit message width and check spelling
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 set nospell
-
-" Create a commit
-map <leader>gco :Gco<cr>
-
-" Show git status
-map <leader>gst :Gst<cr>
-
-" Amend changes in file
-map <leader>gr :Gread<cr>
-
-" Show blame for file
-map <leader>gb :Gblame<cr>
-
-" Show diff for file
-map <leader>gd :Gd<cr>
 
 " CtrlP Settings
 hi def link CtrlPMatch CursorLine
@@ -227,12 +174,6 @@ let g:ctrlp_custom_ignore = {
 
 " Clear cache for CtrlP - index a new list of files
 map <leader>c :CtrlPClearCache<cr>
-
-" Show me recently opened files
-nmap <leader>b :CtrlPBuffer<cr>
-
-" Index tags within a project
-map <Leader>rt :!ctags --extra=+f --exclude=.git --exclude=coverage --exclude=.svn --exclude=log  --exclude=app/assets --exclude=vendor -R<cr><cr>
 
 " Search for word under cursor
 nnoremap K :Ag <cword><cr>
@@ -249,12 +190,12 @@ nmap <leader>bi :BundleInstall<cr>
 " Toggle search highlighting
 nmap <silent> <leader>h :set invhls<CR>:set hls?<CR>
 
-" Exec specs in osx iterm
-let g:rspec_runner = 'os_x_iterm'
+set wrap
 
-" Debugging abbreviations - expandable
-:ab bp binding.pry
-:ab clg console.log()
-:ab clog console.log()
+let NERDTreeIgnore = ['\.pyc$', '^cookbooks$']
 
-au FileType ruby nnoremap rc :!ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) 2>/dev/null<CR>
+" airline
+let g:airline_powerline_fonts = 1
+" let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'onedark'
+set laststatus=2
