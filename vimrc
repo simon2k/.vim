@@ -22,14 +22,21 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'joshdick/onedark.vim'
-Plugin 'kien/ctrlp.vim'
+
 Plugin 'rking/ag.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-commentary'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-endwise'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-rails'
+
 call vundle#end()
 
 autocmd FileType ruby compiler ruby
@@ -58,16 +65,14 @@ autocmd FileType css,scss set iskeyword=@,48-57,_,-,?,!,192-255
 autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
 set t_Co=256
-colorscheme railscasts
+" colorscheme railscasts
+" colorscheme onedark
+" colorscheme OceanicNext
+"colorscheme srcery-drk
+" colorscheme macvim-light
+colorscheme abra
 
 syntax sync fromstart
-
-set ls=2 " show a status line even if there's only one window
-
-" Improve vim's scrolling speed
-set ttyfast
-set ttyscroll=3
-set lazyredraw
 
 set wildmenu    " show completion on the modeline
 set linespace=0 " number of pixels between the lines
@@ -132,9 +137,7 @@ set guioptions-=T " Remove toolbar
 set guioptions-=r " Remove right-hand scroll bar
 set guioptions-=L " Remove left-hand scroll bar
 set guioptions-=M " Remove menubar
-
-" Awesome font!
-set guifont=Menlo:h15
+" set guioptions-=e " Display tabs
 
 command! -nargs=1 Silent
 \ | execute ':silent !'.<q-args>
@@ -173,16 +176,15 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " Clear cache for CtrlP - index a new list of files
-map <leader>c :CtrlPClearCache<cr>
+map <leader>cpc :CtrlPClearCache<cr>
 
 " Search for word under cursor
 nnoremap K :Ag <cword><cr>
 
-" Open next buffer
+" Open next / prev buffer
 nnoremap <tab> :bn<cr>
-
-" Open previous buffer
 nnoremap <s-tab> :bp<cr>
+map <C-d> :bd<cr>
 
 " Install VIM Plugins
 nmap <leader>bi :BundleInstall<cr>
@@ -190,12 +192,18 @@ nmap <leader>bi :BundleInstall<cr>
 " Toggle search highlighting
 nmap <silent> <leader>h :set invhls<CR>:set hls?<CR>
 
+nmap <leader>cp :let @+ = expand("%")<CR>
+
 set wrap
 
-let NERDTreeIgnore = ['\.pyc$', '^cookbooks$']
+let NERDTreeIgnore = ['\.pyc$', '^cookbooks$', '^build$', 'node_modules']
+let g:ag_prg='ag -S --nocolor --nogroup --column --ignore node_modules --ignore "./public/*"  --ignore "./coverage/*" --ignore "./build/*"'
 
-" airline
-let g:airline_powerline_fonts = 1
-" let g:airline_theme = 'powerlineish'
-let g:airline_theme = 'onedark'
+" Awesome font!
+" set guifont=Roboto\ Mono\ Light\ for\ Powerline:h15
+set guifont=Monaco:h16
+
+map <Leader>c :cd %:p:h<CR>
+map <C-C> :CtrlPBuffer<CR>
+
 set laststatus=2
